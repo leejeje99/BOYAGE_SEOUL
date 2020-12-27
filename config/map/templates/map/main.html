@@ -1,0 +1,1131 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title> 
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Raleway&display=swap" rel="stylesheet">
+    <!-- font-family: 'Open Sans', sans-serif;
+        font-family: 'Raleway', sans-serif; -->
+   
+    <style>
+        
+        
+        *,
+        *::before,
+        *::after {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            list-style: none;
+            list-style-type: none;
+            text-decoration: none;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+        /* 헤더 */
+        a,
+        button {
+            font-size: inherit;
+            line-height: inherit;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            background: none;
+            text-decoration: none;
+        }
+
+
+        .container {
+            max-width: 85rem;
+            width: 100%;
+            height: auto;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .brand {
+            
+            font-family:'Raleway';
+            font-size: 2.55rem;
+            font-weight: 900;
+            color: #148cb8;
+            text-transform: uppercase;
+        }
+
+        .header {
+            overflow: visible;
+            width: 100%;
+            height: 9.5%;
+            z-index: 999;
+            color: #252a32;
+            background: #ffffff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.24);
+
+        }
+        .header .navbar {
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+                    flex-direction: row;
+            -webkit-box-pack: center;
+                    justify-content: center;
+            -webkit-box-align: center;
+                    align-items: center;
+            padding: 0.85rem 0;
+        }
+        .header .navbar .burger {
+            position: fixed;
+            top: 1.75rem;
+            left: 2rem;
+            z-index: 9;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            background: none;
+            -webkit-transition: left 0.5s cubic-bezier(0.6, 0.05, 0.28, 0.91);
+            transition: left 0.5s cubic-bezier(0.6, 0.05, 0.28, 0.91);
+        }
+        .header .navbar .burger-close {
+            display: none;
+        }
+        .header .navbar .burger.active {
+            left: 14rem;
+        }
+        .header .navbar .burger.active .burger-open {
+            display: none;
+        }
+        .header .navbar .burger.active .burger-close {
+            display: block;
+        }
+        .header .navbar .menu {
+            position: fixed;
+            overflow: visible;
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+                    flex-direction: column;
+            -webkit-box-pack: center;
+                    justify-content: center;
+            -webkit-box-align: start;
+                    align-items: flex-start;
+            z-index: 8;
+            opacity: 0;
+            top: 0rem;
+            left: -17rem;
+            width: 13rem;
+            height: 100%;
+            color: #252a32;
+            background: #ffffff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.24);
+            -webkit-transition: all 0.5s cubic-bezier(0.6, 0.05, 0.28, 0.91);
+            transition: all 0.5s cubic-bezier(0.6, 0.05, 0.28, 0.91);
+        }
+        .header .navbar .menu-item {
+            
+            height: 100px;
+            width: 100%;
+            padding: 1rem 2rem;       
+            outline: none;
+            -webkit-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+        }
+        .header .navbar .menu-item a {
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: inherit;
+            color: #252a32;
+            text-transform: uppercase;
+        }
+        .header .navbar .menu-item:hover {
+            padding: 1rem 3rem;
+            background: #148cb8;
+        }
+        .header .navbar .menu-item:hover a {
+            color: #ffffff;
+        }
+        .header .navbar .menu.active {
+            left: 0;
+            opacity: 1;
+        }
+
+
+        /* 헤더 왼쪽 */
+        #main_position_button {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 600;
+            background: transparent;
+            background-color: green;
+            color: white;
+            border-radius: 7px;
+            text-align: center;
+            font-size: 20px;
+            width: 10%;
+            position: fixed;
+            right: 2%;
+            top: 2.3%;
+
+            height: 5%;
+
+            -webkit-transition: 0.3s;
+	        transform: scale(1.1);
+            transition: all .2s ease-in-out;
+        }
+
+        #main_position_button:hover , #main_position_button:active {
+	        transform: scale(1.0);
+	        transition: .3s;
+        }
+
+
+
+        /* 헤더 팝업 */
+        .menu-item_title {
+            margin-left: 34px;
+            font-size: 26px;
+            font-weight: bold;
+            border-bottom: #148cb8 solid 1px;
+
+        }
+        .menu-item:nth-child(4) {
+            border-bottom: #148cb8 1px solid;
+        }
+        .menu-item:nth-child(4) > a > h4 {
+            transform: scale(1, 1.4);
+            display: inline-block;
+            padding-top: 5px;
+            padding-left: 30px;
+        }
+        .menu-item > a > h4 > span{
+            letter-spacing: -3px;
+            font-stretch: ultra-condensed;
+            font-size: 90px;
+            color: #148cb8;
+            line-height: 0;
+        }
+
+        .main .wrapper {
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+                    flex-direction: row;
+            -webkit-box-pack: center;
+                    justify-content: center;
+            -webkit-box-align: center;
+                    align-items: center;
+            width: 100%;
+        }
+        
+        #sub_logo1{
+            max-width: 100%;
+            max-height: 100%;
+            background: transparent;
+            transform: scale(1.2);
+            padding-left: 3px;
+        }
+        #sub_logo2{
+            border:1px solid transparent;
+            max-width: 100%;
+            max-height: 100%;
+            background: transparent;
+            margin-left: 34px;
+            transform: scale(3);
+        }
+        #visit_text{
+            padding-top: 0;
+            padding-left: 0;
+        }
+        #menu {
+            font-family: 'Raleway';
+        }
+        #menu > li:nth-child(5){
+            height: 50px;
+        }
+
+        .right_bar{
+            float: left;
+            width: 60%;
+        }
+
+
+        /* 바디 */
+        body {  
+            
+            margin : 0;
+            height: 100vh;
+            width: 100vw;
+        }
+        #map{
+            width:100%; 
+            height:90.5%;
+        }
+
+        /* mobile */
+        /* 메인 콘텐츠 로고 있는창 */
+        /* 컨텐츠 창  */
+        #content_div{
+            font-family: 'Raleway', sans-serif;
+            white-space: normal;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            align-items: center;
+        }
+        
+        #Logo{
+
+            width: 80%;
+            position: relative;
+            margin-top : 15px;
+            margin-bottom : 25px;
+        }
+
+        #searchword{
+            font-family: "Raleway";
+            width: 80%;
+            height: 30px;
+        }
+        #search_result_link{
+            font-size: 20px;
+            font-family: "Raleway";
+            margin-top: 37px;
+        }
+
+        #main_info {
+            position: absolute;
+            background-image:url("{% static 'map/mapmain/main_window.png'%}");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            top:0;
+            left:0;
+            width:24vw; 
+            height:60vh; 
+            border:none;
+            border-radius: 5%;
+            overflow: hidden;
+        }
+        #searchword{
+            width: 70%;
+            height: 40px;
+            font-size: 1.3em;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            border: none;
+        }
+        #search_button{
+            font-family: 'Raleway', sans-serif;
+            font-weight: 600;
+            color:rgba(28, 190, 131, 1);
+            background-color:transparent;
+            border:1px solid rgba(28, 190, 131, 1);
+            border-radius:10px;
+            font-size: 16px;
+            padding: 0.5em 2em;
+            margin:5px;
+                    
+            background-size: 200% 100%;	
+            background-image: linear-gradient(to right, transparent 50%, rgba(28, 190, 131, 1) 50%);
+            transition: background-position .3s cubic-bezier(0.19, 1, 0.22, 1) .1s, color .5s ease 0s, background-color .5s ease;
+        }
+
+        #search_button:hover{
+            color:rgba(255, 255, 255, 1);
+            background-color:rgba(28, 190, 131, 1);
+            background-position: -100% 100%;
+        }
+        #content_div p{
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: goldenrod;
+        }
+        #content_div input{
+            background-color: white;
+        }
+        /* 검색 결과 */
+        #result{
+            vertical-align: middle;
+            text-align: center;
+            font-size: 15px;
+
+        }
+
+        #result_fail{
+            vertical-align: middle;
+            text-align: center;
+            line-height: 23px;
+            font-size: 15px;
+            padding-bottom: 10px;
+        }
+
+        #result_box{
+            margin-bottom: 10px;
+            font-size: 20px;
+            font-weight: 200;
+            border-radius: 10px;
+            margin-top: 4%;
+            width: 70%;
+            height: 20%;
+            background-color: white;
+            opacity: 0;
+        }
+        /* 검색 결과 애니메이션 */
+        .appear{
+            -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+            -webkit-animation-name: fade-in;
+            animation-name: fade-in;
+            -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+        }
+
+        @-webkit-keyframes fade-in {from{opacity: 0;} to{opacity: 1;}}
+        @keyframes fade-in {from{opacity: 0;} to{opacity: 1;}}
+
+        /* 내 위치 찾는 파란 버튼 */
+        #my_position{
+            text-align: center;
+            height: 40px;
+            width: 170px;
+            margin-bottom: 10px;
+            position: relative;
+            box-sizing: border-box;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-color: transparent;
+            border: 2px solid #3498db;
+            border-radius: 0.6em;
+            color: #3498db;
+            cursor: pointer;
+
+            font-size: 1rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            font-weight: 700;
+            background-image: linear-gradient(45deg, #3498db 50%, transparent 50%);
+            background-position: 100%;
+            background-size: 400%;
+            -webkit-transition: background 300ms ease-in-out;
+            transition: background 300ms ease-in-out;
+        }
+
+        #my_position:hover, #my_position:focus {
+            color: white;
+            outline: 0;
+            background-position: 0;
+        }
+
+        #return_btn{
+            background-color: white;
+        }
+
+
+        #map > div:nth-child(1) > div > div:nth-child(6) > div {
+            border-radius: 5px;
+            border: none !important;
+        }
+        /* 인포윈도우 여러개 창*/
+        #map > div:nth-child(1) > div > div:nth-child(6) > div > img{
+            width: 30px;
+            height: 30px;
+        }
+        .custom_place{
+            width: 280px;
+            background-image: url("{% static 'map/mapmain/infoback.png'%}");
+            background-repeat: no-repeat;
+            background-size: 60% 60%;
+        }
+        #custom_link{           
+            text-align: center;
+            width: 90%;
+            height: 70%;
+            padding-bottom: 20px;
+
+        }
+        .main_img {
+            display: block;
+            margin: 0 auto;
+            width: 90%;
+            height: 190px;
+            border-radius: 5px;
+            
+        }
+        .title{
+            font-family: 'Open sans';
+            margin: 0 auto;
+            width: 80%;
+            padding-top: 10px;
+            margin-bottom: 15px;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .custom_place a{
+            text-decoration: none;
+            color:rgb(54, 49, 49);
+        }
+        .decript_wrap{
+            margin-top: 10px;
+            background-image: url("{% static 'map/mapmain/infowindow1.jpg' %}");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+        .hashtag{
+            font-family: "Raleway";
+            display: inline-block;
+            border-radius: 10px;
+            padding: 5px 10px 5px 10px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-size: 20px;
+            font-weight: 700;
+            background-color: #148cb8;
+            color: white;
+        }
+
+        .descript{
+            font-family: 'Open sans';
+            color: white;
+            text-align: left;
+            margin-left: 15px;
+            width: 90%;
+            font-size: 20px;
+            padding-bottom: 10px;
+            font-weight: 480; 
+        }
+
+        /* 인포윈도우 */
+
+    </style>
+    <link rel="stylesheet" href="{% static 'map/main.css'%}">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="burger" id="burger">
+                <span class="burger-open">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="16">
+                        <g fill="#252a32" fill-rule="evenodd">
+                            <path d="M0 0h24v2H0zM0 7h24v2H0zM0 14h24v2H0z" />
+                        </g>
+                    </svg>
+                </span>
+                <span class="burger-close">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <path fill="#252a32" fill-rule="evenodd" d="M17.778.808l1.414 1.414L11.414 10l7.778 7.778-1.414 1.414L10 11.414l-7.778 7.778-1.414-1.414L8.586 10 .808 2.222 2.222.808 10 8.586 17.778.808z" />
+                    </svg>
+                </span>
+            </div>
+            <ul class="menu" id="menu">
+                <li class="menu-item_title">information</li>
+                <li class="menu-item" style="size: 100px;"><a href="https://www.youtube.com/results?search_query=seoul+tour"><img id="sub_logo1"src="http://pngimg.com/uploads/youtube/youtube_PNG13.png" alt=""></a></li>
+                <li class="menu-item" style="overflow: hidden;"><a href="https://www.tripadvisor.com/Search?q=seoul%20tour&searchSessionId=DF5C8C52BBEE645DD74DD247BDF2362A1603380274050ssid&searchNearby=false&geo=294197&sid=E22D2F33A8E714D4875FD5F8746473BA1603380282529&blockRedirect=true">
+                    <img id="sub_logo2"src="https://logodownload.org/wp-content/uploads/2015/12/tripadvisor-logo-0.png" alt=""></a></li>
+                <li class="menu-item"><a href="https://english.visitseoul.net/index"><h4 id="visit_text">visitseoul<span>.</span>net</h4></a></li>
+                <li class="menu-item"><a href="" class="menu-link">about</a></li>
+            </ul>
+            <h1 ><a href="" class="brand">Voyage SEOUL</a></h1>
+            <button id="main_position_button">
+                Go To Center!
+            </button>
+        </nav>
+    </header>
+    <div id="map" class="main">
+    </div>
+    {#jquery script 추가#}
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src={{ api_key }} defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript">
+    const burger = document.getElementById("burger");
+    const menu = document.getElementById("menu");
+    const main = document.querySelector(".main");
+
+    // Sidebar Menu Toggle
+    burger.addEventListener("click", function () {
+        burger.classList.toggle("active");
+        menu.classList.toggle("active");
+    });
+
+    // Close Sidebar by Click Outside
+    main.addEventListener("click", function () {
+        if (menu.classList.contains("active")) {
+            burger.classList.remove("active");
+            menu.classList.remove("active");
+        }
+    });
+
+    // Close Sidebar by Press Escape(ESC)
+    window.addEventListener("keyup", function (e) {
+        if (e.key == "Escape" && menu.classList.contains("active")) {
+            burger.classList.remove("active");
+            menu.classList.remove("active");
+        }
+    });
+
+    
+    
+    // 
+    const map_media = window.matchMedia("screen and (min-width: 768px)");
+    var infowindows = [];
+    // 메인 지도만들기 함수
+    function initMap() {
+        
+        if(matchMedia("Screen and (min-width : 768px)").matches){
+            mapOption = {
+                center: {lat :37.57180813280114 , lng:126.90710964039833}, // 지도의 중심좌표                
+                zoom:13.1, // 지도의 확대 레벨
+            };
+        }
+        else {
+            mapOption = {
+                center: {lat :37.60050679762352, lng: 126.99737991825937}, // 지도의 중심좌표                
+                zoom:13, // 지도의 확대 레벨
+                maxZoom :13.2,
+                minZoom : 13,
+            };
+        }
+
+        const seoul_path = [
+            { lat:37.63633745484535, lng :126.98419895293965 },
+            { lat:37.649610056809145, lng :126.98393720731121 },
+            { lat:37.65603864767572, lng :126.97965838948028 },
+            { lat:37.66523164691442, lng :126.99222479574557 },
+            { lat:37.67766063757532, lng :126.99324754614975 },
+            { lat:37.68346620546411, lng :126.99731144620054 },
+            { lat:37.68543159785305, lng :127.00844015206046 },
+            { lat:37.69669983610237, lng :127.00966648935884 },
+            { lat:37.70145528489685, lng :127.01541538430497 },
+            { lat:37.699291628879486, lng :127.02928585352649 },
+            { lat:37.693074532525486, lng :127.03102640957451 },
+            { lat:37.69529978213384, lng :127.04110878616964 },
+            { lat:37.6879770088145, lng :127.04982029789387 },
+            { lat:37.69033198261366, lng :127.05966013397045 },
+            { lat:37.69467591087357, lng :127.06273214168365 },
+            { lat:37.69379950005513, lng :127.07265787472208 },
+            { lat:37.69613746853863, lng :127.08110504441512 },
+            { lat:37.689912203547465, lng :127.08653090515686 },
+            { lat:37.68907104654816,lng : 127.0959962350361 },
+            { lat:37.67803011190923, lng :127.09218986524063 },
+            { lat:37.668829414056034, lng :127.09623763499523 },
+            { lat:37.65933455614688, lng :127.09120718723014 },
+            { lat:37.644570600366755, lng :127.09457024704095 },
+            { lat:37.64549283479252, lng :127.10392096392212 },
+            { lat:37.642730280124304, lng :127.11075157374883 },
+            { lat:37.63150328312291, lng :127.11163259457271 },
+            { lat:37.627330708439835, lng :127.10596379026066 },
+            { lat:37.62165311270904, lng :127.10406649341775 },
+            { lat:37.617888440321146, lng :127.11714702082818 },
+            { lat:37.60460229861077, lng :127.11804728647756 },
+            { lat:37.59952096309647, lng :127.11406413579884 },
+            { lat:37.5954970510195,lng : 127.1168777580777 },
+            { lat:37.58915579374423, lng :127.11067553453809 },
+            { lat:37.58337922691801, lng :127.10896693419976 },
+            { lat:37.58059529692514, lng :127.10344074316001 },
+            { lat:37.573355195330684, lng :127.10093589137692 },
+            { lat:37.57138765536812, lng :127.10423047543429 },
+            { lat:37.56157990173204, lng :127.10120496463985 },
+            { lat:37.55646172295576, lng :127.10639618926962 },
+            { lat:37.5594636199999, lng :127.11733926606031 },
+            { lat:37.56616043567354, lng :127.12861049299246 },
+            { lat:37.56842420998616, lng :127.13766579115777 },
+            { lat:37.56843431799708, lng :127.14894981929052 },
+            { lat:37.57897566669584, lng :127.16674743767011 },
+            { lat:37.58026699938993, lng :127.17510641307325 },
+            { lat:37.57489908561051, lng : 127.175683133838 },
+            { lat:37.56099244574434, lng :127.18199541947102 },
+            { lat:37.54634446534166, lng :127.18282541356943 },
+            { lat:37.544991401222966, lng :127.16316277851398 },
+            { lat:37.53366545280493, lng :127.15356673787608 },
+            { lat:37.52852950569972, lng :127.15268697654699 },
+            { lat:37.51565324988668, lng :127.14213625982916 },
+            { lat:37.5086412794061, lng :127.13996586223696 },
+            { lat:37.503227282449494, lng :127.14595211458052 },
+            { lat:37.500201444063286, lng :127.16139035297738 },
+            { lat:37.48966557332504, lng :127.15851360244915 },
+            { lat:37.48242576587125, lng :127.14766978194545 },
+            { lat:37.47393041836933, lng :127.14352658768853 },
+            { lat:37.47462645849701, lng :127.13285604904866 },
+            { lat:37.46148450981505, lng :127.11698929319067 },
+            { lat:37.46217475485467, lng :127.10434122935226 },
+            { lat:37.45621877731141, lng :127.09909570560038 },
+            { lat:37.45588845591276, lng :127.09354041502398 },
+            { lat:37.44538538433174,lng : 127.0881613394731 },
+            { lat:37.441051495848725,lng : 127.0801716540251 },
+            { lat:37.44152398185093, lng :127.07162594518984 },
+            { lat:37.43204455569579, lng :127.07062900368742 },
+            { lat:37.428985318752225, lng :127.06568165843039 },
+            { lat:37.42833977591055, lng :127.05216948259043 },
+            { lat:37.43823714551939, lng :127.04005277532582 },
+            { lat:37.439004097199444, lng :127.03557372456841 },
+            { lat:37.44892239695137, lng :127.03781196561826 },
+            { lat:37.46123694683907, lng :127.03373222200649 },
+            { lat:37.46270135391511, lng :127.02931628627103 },
+            { lat:37.45749386855796, lng :127.02527761446565 },
+            { lat:37.4548612273246, lng :127.01450961551133 },
+            { lat:37.45805157197175, lng :127.00853164933473 },
+            { lat:37.467124610718436, lng :127.00273482078528 },
+            { lat:37.466608395726844, lng :126.99623104515375 },
+            { lat:37.46149587049806, lng :126.99335441281065 },
+            { lat:37.45721233856831, lng :126.98661263252625 },
+            { lat:37.454412875699575, lng :126.97457955999981 },
+            { lat:37.44626723684568, lng :126.96428976633013 },
+            { lat:37.44203964675225, lng :126.96463403886703 },
+            { lat:37.439069769663256, lng :126.95896605519667 },
+            { lat:37.437385758758445, lng :126.93774665963934 },
+            { lat:37.44174575940965, lng :126.93664720064136 },
+            { lat:37.44546848182784, lng :126.93055434562613 },
+            { lat:37.44577274656767,lng : 126.9232532742115 },
+            { lat:37.43985239397977, lng :126.91926389390531 },
+            { lat:37.43857946006612, lng :126.91230878996343 },
+            { lat:37.43386044897561, lng :126.90939591728329 },
+            { lat:37.43406758544997, lng :126.90298757178175 },
+            { lat:37.45271733945657, lng :126.89398299845806 },
+            { lat:37.45617343925084,lng : 126.8864032397281 },
+            { lat:37.466012339033334, lng :126.88461752785035 },
+            { lat:37.47382773827894,lng : 126.8780114143206 },
+            { lat:37.485269388328256, lng :126.87176262320455 },
+            { lat:37.49409550878415,lng : 126.8697094568138 },
+            { lat:37.489968081312746,lng : 126.8613844241871 },
+            { lat:37.481818621008486,lng : 126.8527004669192 },
+            { lat:37.48092538151281, lng :126.84604936869323 },
+            { lat:37.47381246504791, lng :126.84536055113804 },
+            { lat:37.4791624015951, lng :126.81899737749872 },
+            { lat:37.48550426819136, lng :126.81932699742356 },
+            { lat:37.489979311624325, lng :126.82276239353517 },
+            { lat:37.493193333608126, lng :126.81457493423707 },
+            { lat:37.499210625612776, lng :126.81964020426688 },
+            { lat:37.510875084136025, lng :126.82385670190524 },
+            { lat:37.51622024183668, lng :126.82310455528273 },
+            { lat:37.52670278019386, lng :126.82842776306038 },
+            { lat:37.53482762620097, lng :126.82192192638068 },
+            { lat:37.54075211797055, lng :126.820936223837 },
+            { lat:37.54271595008565,lng : 126.8018499944564 },
+            { lat:37.53776744939753, lng :126.79947900949198 },
+            { lat:37.537360321187805,lng : 126.7939634000023 },
+            { lat:37.54607642021667, lng :126.78726079639769 },
+            { lat:37.548307221728344, lng :126.77169082657402 },
+            { lat:37.55422251966133, lng :126.76740685452621 },
+            { lat:37.561863504965395, lng :126.77610890964422 },
+            { lat:37.57360620884035, lng :126.78240829132184 },
+            { lat:37.57558356148301,lng : 126.7876142355346 },
+            { lat:37.59030890238822, lng :126.80052027640662 },
+            { lat:37.59773892665825, lng :126.79708249228624 },
+            { lat:37.605032751291596, lng :126.80258139440184 },
+            { lat:37.59533033344382,lng : 126.8175259857064 },
+            { lat:37.592849755415635, lng :126.81930252899663 },
+            { lat:37.578879040740745, lng :126.84324022524508 },
+            { lat:37.573799120207156, lng :126.85362858539504 },
+            { lat:37.577472439956416, lng :126.86494118438374 },
+            { lat:37.578185229528025, lng :126.87626055876719 },
+            { lat:37.58624787215412,lng : 126.8775423437769 },
+            { lat:37.59185254528251, lng :126.88357514737434 },
+            { lat:37.58853284631101, lng :126.88715927976557 },
+            { lat:37.58856662201534, lng :126.89685903413574 },
+            { lat:37.595141350835846, lng :126.90182975753098 },
+            { lat:37.61119134558898, lng :126.90030432159125 },
+            { lat:37.62194146315447, lng :126.90711746719701 },
+            { lat:37.633397950198884,lng : 126.9070962475348 },
+            { lat:37.64431535828266, lng :126.91227986046482 },
+            { lat:37.646106302093415, lng :126.92412290920528 },
+            { lat:37.65120265513912, lng :126.93570568901892 },
+            { lat:37.656635927193484, lng :126.94012815926209 },
+            { lat:37.65712581204024, lng :126.94788243321867 },
+            { lat:37.6528372305888, lng :126.95710810438416 },
+            { lat:37.62979311656106, lng :126.96376722201323 },
+            { lat:37.63633745484535, lng :126.98419895293965 },
+        ];
+        //지도를 표시할 div
+        var mapContainer = document.getElementById('map')
+        //map 옵션
+        //맵을 만드는 명령
+        map = new google.maps.Map(mapContainer, mapOption)
+        //맵 확대 축소 금지
+        // 다각형을 생성합니다
+        const polygon = new google.maps.Polygon({
+            path: seoul_path,
+            strokeWeight: 2,
+            strokeColor: '#424242',
+            strokeOpacity: 0.8,
+            fillColor: '#fff',
+            fillOpacity: 0.35,
+            clickable: false
+        });
+        polygon.setMap(map)
+    
+        //실행   
+        // 지도 중앙으로 돌아감
+        document.querySelector('#main_position_button').addEventListener('click', function(){
+            console.log("실행")
+            if(matchMedia("Screen and (min-width : 768px)").matches){
+                var moveLatLon = new google.maps.LatLng(37.57180813280114,126.90710964039833);
+            }
+            else{
+                var moveLatLon = new google.maps.LatLng(37.60050679762352 ,126.99737991825937);
+            }
+            map.panTo(moveLatLon);
+        });
+
+        //-----------------------main_box 커스텀 오버레이 -------------------------------------
+            
+        // 마커생성
+        function displayMarker(locPosition, message) {
+
+            // 마커를 생성합니다
+            var marker = new kakao.maps.Marker({
+                map: map,
+                position: locPosition
+            });
+
+            var iwContent = message, // 인포윈도우에 표시할 내용
+                iwRemoveable = false;
+
+            // 인포윈도우를 생성합니다
+            var infowindow = new kakao.maps.InfoWindow({
+                content: iwContent,
+                removable: iwRemoveable
+            });
+
+            // 인포윈도우를 마커위에 표시합니다 
+            infowindow.open(map, marker);
+
+            // 지도 중심좌표를 접속위치로 변경합니다
+            map.setCenter(locPosition);
+                // 현재 지도의 레벨을 얻어옵니다
+            function mapmoving() {
+                var level = map.getLevel();
+                // 지도를 1레벨 내립니다 (지도가 확대됩니다)
+                map.setLevel(level - 3);
+
+                
+
+            };
+            setTimeout(mapmoving,2000)
+            setTimeout(mapmoving,2000)
+            map.setDraggable(true)
+                
+        }
+        //인풋창 만들기
+        function create_input() {
+            const content = document.createElement('div');
+            content.id = "main_info";
+            const content_div = document.createElement('div');
+            content_div.id = "content_div";
+
+            const img_box = document.createElement('img');
+            img_box.id = "Logo";
+            img_box.setAttribute("src", "{% static 'map/Logo.png' %}")
+
+            this.create = function(cn) {
+                
+                const input = document.createElement('input');
+
+                if (cn.indexOf("input") != -1) {
+                    input.type = "textbox";
+                    input.placeholder = "where are you looking for?"
+                    input.id = 'searchword';
+                }
+                else {
+                    input.type = "button";
+                    input.value = "Where Am I?"
+                }
+                return input;
+            }
+            search_btn = document.createElement('input')
+            search_btn.setAttribute("type", "button")
+            search_btn.setAttribute("id", "search_button")
+            search_btn.setAttribute("value", "Search!")
+            search_btn.setAttribute("onclick", "searchajax()")
+
+            search_input = this.create("search_input");
+            my_position_button = this.create("my_position_button");
+            my_position_button.id = "my_position"
+            
+            result_box = document.createElement('div');
+            result_box.id = 'result_box';
+
+            const result = document.createElement('div');
+            result.id = 'result';
+            const result_fail = document.createElement('div');
+            result_fail.id = 'result_fail';
+            const text = document.createElement('p')
+            text.textContent = "Search or Click Places you want to Go!"
+        
+            content.appendChild(content_div);
+            content_div.appendChild(img_box);
+            content_div.appendChild(text);
+            content_div.appendChild(search_input);
+            content_div.appendChild(search_btn);  
+
+            content_div.appendChild(result_box)     
+            result_box.appendChild(result);
+            result_box.appendChild(result_fail);
+            content_div.appendChild(my_position_button); 
+            
+            if(matchMedia("Screen and (min-width : 768px)").matches){
+                var position = new google.maps.LatLng(37.60392189540376 ,126.7865100145698);
+            }
+            else{
+                var position = new google.maps.LatLng(37.6577420897492 ,126.9711932582916);
+            }
+
+            class CSOverlay extends google.maps.OverlayView{
+                constructor(pos, cont){
+                    super();
+                    this._pos = pos;
+                    this._cont = cont;
+                    CSOverlay.preventMapHitsAndGesturesFrom(this._cont);
+                }
+
+                onAdd(){
+                     this.getPanes().floatPane.appendChild(this._cont);
+                }
+                draw(){
+                    const divPosition = this.getProjection().fromLatLngToDivPixel(
+                        this._pos
+                    );
+                    
+                    const display =
+                        Math.abs(divPosition.x) < 4000 && Math.abs(divPosition.y) < 4000
+                        ? "block": "none";
+
+                    if (display === "block") {
+                        this._cont.style.left = divPosition.x + "px";
+                        this._cont.style.top = divPosition.y + "px";
+                    }
+
+                    if (this._cont.style.display !== display) {
+                        this._cont.style.display = display;
+                    }
+                }
+            } 
+
+            const customOverlay = new CSOverlay(position, content )
+            customOverlay.setMap(map);
+
+            const img_my ={
+                url : "{% static 'map/mapcontents/my-mark.png'%}",
+                scaledSize : new google.maps.Size(50, 50),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(0, 32),
+            }
+            let infoWindow = new google.maps.InfoWindow();
+            
+            my_position_button.addEventListener("click", function () {
+                if (navigator.geolocation) {
+
+                    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+                    navigator.geolocation.getCurrentPosition((position) => {
+                        const pos = {
+                            lat : position.coords.latitude, // 위도
+                            lng : position.coords.longitude, // 경도
+                        };
+                        marker2 = new google.maps.Marker({ 
+                            position :pos,
+                            map: map,
+                            icon : img_my,
+                        });
+                        marker2.setPosition(pos)
+                        // infoWindow.open(map);
+                        map.setCenter(pos)
+                    },
+                    ()=>{
+                        handleLocationError(true, infoWindow, map.getCenter());
+                    });
+                }
+                else{
+                    //브라우저가 지원 안함
+                    handleLocationError(true, infoWindow, map.getCenter());
+                }
+            })
+
+            function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+                infoWindow.setPosition(pos);
+                infoWindow.setContent(
+                browserHasGeolocation
+                    ? "Error: The Geolocation service failed."
+                    : "Error: Your browser doesn't support geolocation."
+                );
+                infoWindow.open(map);
+            }
+
+
+                //         var locPosition = new google.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+                //             message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
+
+                //         // 마커와 인포윈도우를 표시합니다
+                //         displayMarker(locPosition, message);
+
+                //     });
+
+                // } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+
+                //     var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
+                //         message = 'geolocation을 사용할수 없어요..'
+
+                //     displayMarker(locPosition, message);
+                // }
+
+                    // 지도에 마커와 인포윈도우를 표시하는 함수입니다
+
+        }
+        create_input() 
+
+        // 검색 부분
+        $('#searchword').keyup(function(e){if(e.keyCode==13) searchajax();}); // 검색 Ajax
+        var content = '';
+        //css : search_result_btn, 실패 버튼 
+        search_btn.addEventListener("click", function(){
+            if(!result_box.classList.contains('appear')){
+                console.log("실행")
+                result_box.classList.add('appear');
+            }
+        })
+
+        
+
+        // 지도에 클릭 이벤트를 등록합니다
+        // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
+
+        function placeinfo() {
+            var positions = [
+            {% for place in places %}
+            {
+                title: '<div class="custom_place">' + "<a href='{% url 'map:map_contents' place.id %}' id='custom_link'>" + 
+                    '<p class="title">{{ place.name }}</p>' + "<image class='main_img' src='{{ place.image }}' alt='없음'>" + 
+                    "<div class='decript_wrap'>"+ "<p class='hashtag'>HASHTAG</p>" +"<p class='descript'>{{place.description}}</p>"+ '</div>' + "</a>"+ '</div>',
+                latlng : new google.maps.LatLng({{ place.lat }}, {{ place.lng }}),
+            },
+            {% endfor %}
+            ];
+            // selectedMarker = null;
+            const img ={
+                url : "{% static 'map/mapmain/Slogo.png'%}",
+                scaledSize : new google.maps.Size(60, 60),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(0, 32),
+            }
+            for (var i = 0; i < positions.length; i++) {
+
+
+
+                // 마커를 생성합니다
+                var marker = new google.maps.Marker({
+                    map: map, // 마커를 표시할 지도
+                    position: positions[i].latlng, // 마커의 위치
+                    clickable: true,
+                    icon: img
+                });
+                var infowindow = new google.maps.InfoWindow({
+                    position: positions[i].latlng,
+                    content: positions[i].title,
+                    removable: true,
+                });
+
+                infowindows.push(infowindow);
+                google.maps.event.addListener(marker, 'click', makeOverListener(map, marker, infowindow));
+                google.maps.event.addListener(map, 'click', makeMainListener(map, infowindow));
+            }  
+        
+            // console.log(infowindows)
+
+            function closeInfoWindow() {
+                for(var idx=0; idx<infowindows.length; idx++){
+                    infowindows[idx].close()
+                }
+            }
+
+            function makeOverListener(map, marker, infowindow) {
+                    return function () {
+                        closeInfoWindow()
+                        infowindow.open(map, marker);             
+                    };
+                }
+            function makeMainListener(map, infowindow){
+                return function() {
+                    infowindow.close(map, marker);
+                    
+                }
+            }
+
+        
+
+        }
+        placeinfo()
+    }
+    // //console.log(infowindows[1]['a']['innerText'])
+    // //검색 결과 클릭 시 해당 인포 열림 
+    function gotoplace(){
+        result = $('#search_result_link').text()
+        // console.log(result)                                       
+        for (var i = 0; i < infowindows.length; i++){
+            var word = infowindows[i]["content"]
+            if (word.indexOf(result) != -1){
+                infowindows[i].open(map)
+                infowindows[i].setOption('zIndex', 1)
+            }
+        }
+    }   
+
+    //실행
+    //------------------------------------------------------------
+    function searchajax() {
+        console.log("안녕")
+            // $('#searchword').keyup(function(){
+        var words = $('#searchword').val();
+            
+        function find(){
+            $('#result_fail').html("");
+            $('#result').html("");
+
+        // $('#result').html(content);/
+        if (words != ''){
+                $.ajax({
+                    type : "POST",
+                    url : "search/",
+                    data : { searchwords : words, csrfmiddlewaretoken: "{{csrf_token}}"},
+                    success : function(response){
+                            if (!response.search_result[0]) {
+
+                                content2 = "<div>Please re-enter!</div>(Check first letter... etc)</div>";
+                                $('#result_fail').html(content2);
+                            }      
+                            else {
+                                $('#result_fail').html('');
+                                place_id_list = response.search_result;
+                                {% for place in places %}
+                                var place_id = {{ place.id}}
+                                for (var i = 0; i < place_id_list.length; i++) {
+                                    if (place_id == place_id_list[i]) {
+                                        // content = "<a class='search_result_link' href='map_contents/" + place_id + "'>" + response.name + "</a>"
+                                        content = "<button id='search_result_link' onclick='gotoplace()'>"+ response.name + "</button>"
+                                        $('#result').html(content);
+                                    }
+                                }
+                                {% endfor %}  
+                            }
+                        }, error: function() {
+                            
+                    }
+                });
+            } 
+            else {
+                content2 = "<div>Please enter at least one letter.</div>";
+                $('#result_fail').html(content2);
+            }
+        }
+        find()
+    }
+
+ 
+    
+    </script>
+</body>
+</html>

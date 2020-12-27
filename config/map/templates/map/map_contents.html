@@ -1,0 +1,972 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Raleway&display=swap" rel="stylesheet">
+    <style>
+        html/body/div:nth-child(1)/div/div/div:nth-child(2){
+            left:50%
+        }
+        /* Navigator ======================================================== */
+        .bar_appear{
+            animation-duration:0.7s;
+            animation-name: appear;
+            animation-fill-mode: forwards;
+            -webkit-animation-fill-mode: forwards;
+            -webkit-animation-duration : 0.7s;
+            -webkit-animation-name : appear;
+        }
+        @keyframes appear{from{bottom: -30%;}to{bottom: 3%;}}
+        @-webkit-keyframes appear{from{bottom: -30%;}to{bottom: 3%;}}
+
+        .bar_dissapear{
+            animation-duration:0.5s;
+            animation-name: dissapear;
+            animation-fill-mode: forwards;
+            -webkit-animation-fill-mode: forwards;
+            -webkit-animation-duration : 0.5s;
+            -webkit-animation-name : dissapear;
+        }
+        @keyframes dissapear{from{bottom: 3%;}to{bottom: -30%;}}
+        @-webkit-keyframes dissapear{from{bottom: 3%;}to{bottom: -30%;}}
+
+        /* 카테고리 검색 창 */
+        ::-webkit-scrollbar{display: none;}
+        .getdata{position: absolute;top: 370px;left: 10px;z-index: 1;}
+        .modes {position: absolute;top: 10px;left: 10px;z-index: 1;}
+
+        .map_wrap, .map_wrap * {margin:0; padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
+        /* .map_wrap {position:relative;width:100%;height:350px;} */
+        
+        body {
+            margin: 0;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+
+        #map {
+            width: 100%;
+            height: 90.5%;
+        }
+
+
+        #header {
+            height: 9.5%;
+        }
+        #menu{
+            font-family: "Raleway";
+            background-color: #434d5a;
+            color: white;
+            margin-top: 2%;
+            font-size: 17px;
+            border-radius: 7px;
+            margin-right: 1%;
+            margin-left: 1%;
+            padding-top:1% ;
+            padding-bottom:1% ;
+            width: 13%;
+            border: none;
+
+            -webkit-transition: all 0.2s ease, background-color 0.2s ease-in 0.15s, box-shadow 0.2s ease-in 0.15s, color 0s ease;
+            transition: all 0.2s ease, background-color 0.2s ease-in 0.15s, box-shadow 0.2s ease-in 0.15s, color 0s ease;
+        }
+        #menu:hover{
+            -webkit-transition: all 0.2s ease, background-color 0.2s ease-in 0.05s, box-shadow 0.2s ease-in 0.05s, color 0s ease;
+            transition: all 0.2s ease, background-color 0.2s ease-in 0.05s, box-shadow 0.2s ease-in 0.05s, color 0s ease;
+        }
+        #menu:nth-child(1):hover {
+            background-color: #81A76A;
+        }
+        #menu:nth-child(2):hover {
+            background-color: #DF3D2E;
+        }
+        #menu:nth-child(3):hover, #menu:nth-child(4):hover {
+            color: black;
+            background-color: white;
+        }
+
+        .tool_btn{
+            
+            margin-left:2% ;
+            margin-top: 1%;
+            font-size: 30px;
+            float: left;
+        }
+        .toolbox1{
+            display: none;
+            margin-left: 1.5%;
+            height: 100%;
+            width: 55%;
+            float: left;
+        }
+        .toolbox2{
+            margin-top: 1%;
+            margin-right: 2.5%;
+            float:right;
+            width: 20%;
+        }
+
+
+
+        #menu_wrap2 {position:absolute;top:10%;right:0%;bottom:0;width:24%;margin:10px 0 30px 10px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;border-radius: 10px; }
+        #menu_wrap {position:absolute;top:10%;left:0;bottom:0;width:24%;margin:10px 0 30px 10px;overflow-y:auto;background:rgba(234, 245, 210, .6);z-index: 1;border-radius: 10px; background}
+        /* 사이드바 애니메이션 */
+        /* 왼쪽 */
+        .side_move_left{
+            animation-duration:1s;
+            animation-name: slide;
+            animation-fill-mode: forwards;
+            -webkit-animation-fill-mode: forwards;
+            -webkit-animation-duration : 1s;
+            -webkit-animation-name : slide;
+        }
+
+        @keyframes slide{from{left:0;}to{left: -25%;}}
+        @-webkit-keyframes slide{from{left: 0;}to{left: -25%;}}
+
+        .side_move_left2{
+            animation-duration:1s;
+            animation-name: slide2;
+            animation-fill-mode: forwards;
+            -webkit-animation-fill-mode: forwards;
+            -webkit-animation-duration : 1s;
+            -webkit-animation-name : slide2;
+        }
+        @keyframes slide2{from{left: -25%;}to{left: 0;}}
+        @-webkit-keyframes slide2{from{left: -25%;}to{left: 0;}}
+
+        /* 오른쪽 */
+        .side_move_right{
+            animation-duration:1s;
+            animation-name: slide3;
+            animation-fill-mode: forwards;
+            -webkit-animation-fill-mode: forwards;
+            -webkit-animation-duration : 1s;
+            -webkit-animation-name : slide3;
+        }
+        
+        @keyframes slide3{from{left:74%;}to{left: 100%;}}
+        @-webkit-keyframes slide3{from{left: 74%;}to{left: 100%;}}
+
+        .side_move_right2{
+            animation-duration:1s;
+            animation-name: slide4;
+            animation-fill-mode: forwards;
+            -webkit-animation-fill-mode: forwards;
+            -webkit-animation-duration : 1s;
+            -webkit-animation-name : slide4;
+        }
+        @keyframes slide4{from{left: 100%;}to{left: 74%;}}
+        @-webkit-keyframes slide4{from{left: 100%;}to{left: 74%;}}
+                
+        .bg_white {background:#fff;}
+        
+        /* #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;} */
+
+        #placesList li {list-style: none;}
+        #placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
+        #placesList .item span {display: block;margin-top:4px;}
+        #placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+        #placesList .item .info{padding:10px 0 10px 55px;}
+        #placesList .info .gray {color:#8a8a8a;}
+        #placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
+        #placesList .info .tel {color:#009900;}
+
+        /* 트립 어드바이저 */
+        /* 처음 상위 2개 레이아웃 */
+        .option_trip{
+            padding-top: 5px;
+            font-family: "Raleway";
+            position: fixed;
+            font-size: 25px;
+            color: white;
+            font-weight: 700;
+            text-align: center; 
+            height: 40px; 
+            background-color: #81A76A;
+            float: right;
+            width: 24%;
+            height: 7%;
+        }
+        .option_trip > p {
+            margin-top: 6px;
+        }
+        .trip_imgbox{
+            position: fixed;
+            top: 17%;
+            width: 24%;
+            height: 6.5%; 
+            background-color: white;
+            display: flex;
+            padding-bottom: 1%;
+            border-bottom: #009900 1px solid;
+        }
+        #trip_img{
+            margin-top: 2%;
+            margin-left: 7%;
+            width: 20%; 
+            height:100%; 
+        }
+        .trip_link{
+            border-radius: 10px;
+            margin-top: 3%;
+            background-color: #283B51;
+            padding-top: 2%;
+            display: inline;
+            height: 70%;
+            width: 60%;
+            text-decoration: none;
+            color: white;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .more{
+            background: linear-gradient(to top, yellow 50%, transparent 50%);
+            font-size: 1.05em;
+            text-decoration: none;
+            color: green;
+        }
+        /* 유튜브 */
+        .vid_contents img{
+            -webkit-box-shadow: 0px 1px 15px 1px rgba(0,0,0,0.53); 
+            box-shadow: 0px 1px 15px 1px rgba(0,0,0,0.53);
+        }
+        .option_you{
+            font-family: "Raleway";
+            background-color: #DF3D2E;
+            color: white;
+            font-weight: 700;
+            text-align: center;
+            font-size: 25px;
+            padding: 10px 0;
+        }
+        .you_info{
+            font-family: "Raleway";
+            padding: 2% 0;
+            background-color: white;
+            font-size: 24px;
+            font-weight: 300;
+            text-align: center;
+        }
+        .vid_box{
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .thumb{
+            max-width: 90%;
+            margin-top: 10%;
+            height: 220px;
+            border-radius: 5px;
+        }
+        .video_link{
+            text-align: left;
+            align-items: center;
+            text-decoration: none;
+            color: black;
+            font-size: 17px;
+            font-weight: 550;
+        }
+        .video_title{
+            font-family: "Open sans";
+            width: 85%;
+            margin: 0 auto;
+            padding: 2% 0;
+            border-radius: 5px;
+            background-color: rgba(255, 212, 152, .5);
+            margin-bottom: 3%;
+        }
+    
+        /* 맵 안 마크 */
+
+    
+    
+        /* 트립어드바이저 */
+        .rating{
+            font-size: 25px;
+            margin-left: 14px;
+            padding-bottom: 10px;
+        }
+
+        .info_text{
+            font-family: "Open sans";
+            font-size: 1.10em;
+            border-top: 1px solid rgba(138, 138, 138, .5);
+            padding-top: 10px;
+            margin-left: 14px;
+            margin-bottom: 10px;
+            width: 90%;
+        }
+        .trip_box{
+            -webkit-box-shadow: -2px 9px 28px -1px rgba(0,0,0,0.38); 
+            box-shadow: -2px 9px 28px -1px rgba(0,0,0,0.38);
+            background-color: #fff;
+            margin-top: 10px;
+            border-radius: 3px;
+        }
+        .fix_bott{
+            margin-bottom: 32%;
+        }
+        .info_title{
+            font-family: "Raleway";
+            padding-top: 10px;
+            margin-left: 14px;
+            margin-bottom: 3px;
+            font-size: 25px;
+            font-weight: 500;
+        }
+        .visit_date{
+            margin-left: 14px;
+            margin-bottom: 5px;
+        }
+
+        /* 파라노마 */
+        #pano{
+            position: absolute;
+            height: 30%;
+            width: 25.5%;
+            left: 25%;
+            bottom:0%;
+            background-color: #888;
+        }
+
+        /* 길찾기 */
+        #navi_open:before{
+            margin-top: 5px;
+            margin-right: 10px;
+            font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f077";
+            display: inline;
+            float: right;
+        }
+
+        #navi_open.open:before{
+            content: "\f078";
+        }
+
+        .navi_title{
+            position: fixed;
+            font-size: 25px;
+            background-color: black;
+            color: white;
+            font-weight:600;
+            height: 40px;
+            width: 24.5%;
+            border-top-right-radius: 10px;
+            border-top-left-radius: 10px;
+
+        }
+        .navi_title > span:nth-child(1){
+            margin-left: 35%;
+        }
+        .arrow{
+            font-size: 35px;
+            float: right;
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+        #_Navi{
+            background-color: white;
+            position: absolute;
+            bottom:0%;
+            left: 51%;
+            width: 24.5%;
+            height: 30%;
+            border-radius: 10px;
+            overflow: scroll;
+        }
+        #N_text{
+            font-family: "Raleway";
+        }
+        #change{
+            margin-top: 10%;
+        }
+        #change input{
+            -webkit-box-shadow: -2px 0px 7px 2px rgba(0,0,0,0.25); 
+            box-shadow: -2px 0px 7px 2px rgba(0,0,0,0.25);
+        }
+        #origin-input{
+            font-family: "Open sans";
+            margin-top: 5%;
+            margin-left: 10%;
+            margin-bottom: 6%;
+            font-size: 25px;
+            border-radius: 10px;
+            height: 50px;
+        }
+
+        #destination-input{
+            font-family: "Open sans";
+            margin-left: 10%;
+            font-size: 25px;
+            border-radius: 10px;
+            height: 50px;
+        }
+
+        #mode-selector{
+            font-size: 25px;
+            border-radius: 10px;
+        }
+
+
+        .Navi_click_on{
+            -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+            -webkit-animation-name: click_expand;
+            animation-name: click_expand;
+            -webkit-animation-duration: 0.5s;
+            animation-duration: 0.5s;
+        }
+        @-webkit-keyframes click_expand {from{ height: 30%;} to{ height: 50%;}}
+        @keyframes click_expand {from{ height: 30%;} to{ height: 50%;}}
+
+        .Navi_click_off{
+            -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+            -webkit-animation-name: click_short;
+            animation-name: click_short;
+            -webkit-animation-duration: 0.7s;
+            animation-duration: 0.7s;
+        }
+        @-webkit-keyframes click_short {from{ height: 50%;} to{top:67%; height: 30%;}}
+        @keyframes click_short {from{height: 50%;} to{height: 30%;}}
+
+        /* 오른쪽 상단 */
+        #my_location, #main_position_button{
+            background-color: #434d5a;
+            color: white;
+            margin-top: 0.6%;
+            font-size: 15px;
+            border-radius: 7px;
+            margin-right: 1%;
+            margin-left: 1%;
+            padding: 4% 0 ;
+            width: 40%;
+            border: none;
+
+            -webkit-transition: all 0.2s ease, background-color 0.2s ease-in 0.15s, box-shadow 0.2s ease-in 0.15s, color 0s ease;
+            transition: all 0.2s ease, background-color 0.2s ease-in 0.15s, box-shadow 0.2s ease-in 0.15s, color 0s ease;
+        }
+        #my_location:hover, #main_position_button:hover {
+            -webkit-transition: all 0.2s ease, background-color 0.2s ease-in 0.05s, box-shadow 0.2s ease-in 0.05s, color 0s ease;
+            transition: all 0.2s ease, background-color 0.2s ease-in 0.05s, box-shadow 0.2s ease-in 0.05s, color 0s ease;
+        }
+        #my_location:hover{
+            background-color: #3498db;
+        }
+        #main_position_button:hover{
+            background-color: green;
+        }
+        .title{
+            margin-top: 2%;
+            margin-bottom: 5%;
+            font-size: 20px;
+            width: 94%;
+            border-top: #009900 solid 1px;
+            display: block;
+            padding-top: 2%;
+        }
+        a {
+            text-decoration: none;
+        }
+        .tour_place{
+            text-decoration: none;
+            width: 200px;
+        }
+        .main_img{
+            max-height: 133px;
+            width: 94%;
+            margin-bottom:5px ;
+        }
+
+        /* 길찾기 결과 */
+        .fa-home{
+            margin-top: 1.2%;
+        }
+        .tool_logo{
+            margin-left: 2%;
+            font-size: 35px;
+            color: black;
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'map/contents.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+</head>
+
+<body>
+    <div id="header">
+        <div class="tool_btn"><i class="fas fa-bars"></i></div>
+        <div class="toolbox1">
+            <button id="menu" class="ui_button_trip">TripAdvise</button>
+            <button id="menu" class="ui_button_vid">Youtube</button>
+            <button id="menu" class="ui_button_Real" >RealView</button>
+            <button id="menu" class="ui_button_Nav">Navigator</button>
+        </div>
+        <a class="tool_logo" href="/#" ><i class="fas fa-home"></i></a>
+        <div class="toolbox2">
+            <button id="my_location">My Location</button>
+            <button id="main_position_button" >GO TO Center!</button>
+        </div>
+    </div>
+    <div id="map">
+
+    </div>
+    <div id="menu_wrap" class="bg_white trip_advise">
+        <div class="option_trip">
+            <p>Tripadviser</p>
+        </div>
+        <div class="trip_imgbox">
+            <img src="http://logok.org/wp-content/uploads/2020/01/Tripadvisor-logo-2020-1536x1152.png" alt="없음" id='trip_img'">
+            <a href="{{ trip_url }}" class="trip_link">More Information</a>
+        </div>
+        
+        <div class="trip_container">
+            <div class="fix_bott"></div>
+            {% for trip in trips %}
+                
+                <div class="trip_box" style="margin : 20px 10px">
+                    <div class="info_title">{{ trip.info_title }}</div>
+                                        <div class="visit_date">{{ trip.visit_date }}</div>
+                    <div class="info_text"><span class="info_p">{{ trip.info }}</span></div>
+                    <div class="score">
+                        <div class="rating">
+                            <i class="fas fa-smile"></i>
+                            <i class="fas fa-smile"></i>
+                            <i class="fas fa-smile"></i>
+                            <i class="fas fa-smile"></i>
+                            <i class="fas fa-smile"></i>
+                        </div>
+                    </div>
+
+                </div>
+                <script>
+                    var rating = $('.rating')
+                    rating.find('i:nth-child( -n'+ {{ trip.score }}/10 +')').css({color:'rgba(130, 204, 0, .9)'})
+                </script>
+            {% endfor %}
+        </div>
+    
+    </div>
+    <div id="menu_wrap2" class="bg_white">
+        <div class="option_you">
+            YouTube <i class="fab fa-youtube"></i>
+        </div>
+        <div class="you_info">&#127774Click and watch trip video!&#127774</div>
+        <div id="placesList">
+            <div class="vid_box">
+                {% for youtube in youtubes %}
+                <div class="vid_contents">
+                    <a href="{{ youtube.link }}" class="video_link">
+                        <img src="{{ youtube.thumb }}" alt="없음" class="thumb" >
+                        <div class="video_title">
+                            {{ youtube.title }}
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div id="pano"></div>
+    <div id="_Navi"class="Navi">
+        <div class="navi_title Navi"><span id="N_text">Navigation</span><span id="navi_open"></span></div>
+            <div id="change">
+                <input
+                    id="origin-input"
+                    class="Navi"
+                    type="text"
+                    placeholder="origin location"
+                />
+
+                <input
+                    id="destination-input"
+                    class="Navi"
+                    type="text"
+                    placeholder="destination location"
+                />
+            </div>
+        </div>
+
+    </div>
+
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8XrvifQg2uGX8NWiDaJCtlFDrxjeRiK8&language=en&callback=initMap&libraries=places&v=weekly"></script>
+    <script language="javascript" type="text/javascript">
+
+    var marker2;
+    const infowindows = []
+    var num = 1
+    function initMap() {
+
+        $(".info_text").each(function(){
+            var content = $(this).children()
+            var content_txt = content.text();
+            var contnet_txt_short = content_txt.substring(0,200)+"...";
+            var btn_more = $("<a href='javascript:void(0)' class='more'>read more</a>");
+
+            $(this).append(btn_more);
+
+            if (content_txt.length >= 200){
+                content.html(contnet_txt_short);
+            }
+            else
+                btn_more.hide()
+        
+            btn_more.click(toggle_content);
+
+            function toggle_content(){
+                if($(this).hasClass("short")){
+                    $(this).html("read more");
+                    content.html(contnet_txt_short)
+                    $(this).removeClass("short")
+                }
+                else{
+                    $(this).html('close');
+                    content.html(content_txt);
+                    $(this).addClass('short');
+                }
+            }
+        });
+        
+        document.querySelector(".tool_btn").addEventListener("click", function(){
+            $(".toolbox2").toggle({"display":"none"})
+            $(".tool_logo").fadeToggle({"display":"none"})
+            $(this).find('i').toggleClass("fa-bars fa-arrow-circle-up")
+            $(".toolbox1").toggle({"display":"inline"})
+        })
+        document.querySelector(".ui_button_Real").addEventListener("click", function(){
+            const target = document.querySelector('#pano')
+            if(!target.classList.contains('bar_dissapear'))
+                target.classList.add('bar_dissapear');
+            else{
+                target.classList.add('bar_appear');
+                target.classList.remove('bar_dissapear');
+                setTimeout(function(){ target.classList.remove('bar_appear');},1001)
+            }
+        })
+
+        document.querySelector(".ui_button_Nav").addEventListener("click", function(){
+
+            const target = document.querySelector('#_Navi')
+            if (navi.classList.contains('Navi_click_on')){
+                navi.classList.add('Navi_click_off')
+                setTimeout(function(){ navi.classList.remove('Navi_click_on');},1001)
+                setTimeout(function(){ navi.classList.remove('Navi_click_off');},1001)
+            }
+
+            if(!target.classList.contains('bar_dissapear'))
+                target.classList.add('bar_dissapear');
+            else{
+                target.classList.add('bar_appear');
+                target.classList.remove('bar_dissapear');
+                setTimeout(function(){ target.classList.remove('bar_appear');},1001)
+            }
+        })
+        //----------------------------------------------------------------------------
+        // my_position
+        const img_my ={
+            url : "{% static 'map/mapcontents/my-mark.png'%}",
+            scaledSize : new google.maps.Size(50, 50),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(0, 32),
+        }
+        document.querySelector("#my_location").addEventListener('click',function(){
+            if(num == 1){
+                navigator.geolocation.getCurrentPosition(function(position){
+                    newPoint = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                    // 마커 없을 때 새로 만듦
+                    marker2 = new google.maps.Marker({ 
+                        position :newPoint,
+                        map: map,
+                        icon : img_my,
+                    });
+                    console.log(newPoint)
+                    map.panTo(marker2.position)        
+                });
+                setTimeout(this, 5000);
+            
+            
+            }
+            
+            if(num ==2){
+                marker.setMap(null)
+                num =1
+            }
+        })
+        //----------------------------------------------------------------------------
+        // moveto_my_position
+        document.querySelector('#main_position_button').addEventListener('click', function(){
+            var moveLatLon = new google.maps.LatLng({{ placelat }}, {{ placelng }});
+            map.panTo(moveLatLon);
+        });
+        //---------------------------------------------------------------------------
+        //Navi_active
+        const navi = document.querySelector('#_Navi')
+        const _open = document.querySelector("#navi_open")
+        document.querySelector('#_Navi').addEventListener('click',function(){
+            if(!_open.classList.contains("open")){
+                $("#navi_open").toggleClass('open')
+            }
+            navi.classList.add('Navi_click_on')
+        })
+        document.querySelector('#navi_open').addEventListener('click', function (){
+            if (navi.classList.contains('Navi_click_on')){
+                $("#navi_open").toggleClass('open')
+
+                navi.classList.add('Navi_click_off')
+                setTimeout(function(){ navi.classList.remove('Navi_click_on');},1001)
+                setTimeout(function(){ navi.classList.remove('Navi_click_off');},1001)
+            }
+        })
+
+        // document.querySelector('.Navi').addEventListener('click',function(){
+        //     console.log("나감 ")
+        // })
+        //----------------------------------------------------------------------------
+        // trip_bar
+        document.querySelector('.ui_button_trip').addEventListener('click',function(){
+            
+            const target = document.querySelector('#menu_wrap')
+            if(!target.classList.contains('side_move_left'))
+                target.classList.add('side_move_left');
+            else{
+                target.classList.add('side_move_left2');
+                target.classList.remove('side_move_left');
+                setTimeout(function(){ target.classList.remove('side_move_left2');},1001)
+            }
+
+        })
+        //----------------------------------------------------------------------------
+        // youtube_bar
+        if(matchMedia("Screen and (max-width : 768px)").matches){
+            $('#menu_wrap2').toggle(function () {
+                $("#menu_wrap2").css({"display" : "block"})
+            }, function () {
+                $("#menu_wrap2").css({"display" : "none"})
+            });
+        }
+
+        document.querySelector('.ui_button_vid').addEventListener('click',function(){
+            const target = document.querySelector('#menu_wrap2')
+            
+            if(!target.classList.contains('side_move_right')){
+                target.classList.add('side_move_right');
+                if(matchMedia("Screen and (max-width : 768px)").matches){
+                    $('#menu_wrap2').toggle()
+                    console.log("sad")
+                }
+            }
+            else{
+                target.classList.add('side_move_right2');
+                target.classList.remove('side_move_right');
+                setTimeout(function(){ target.classList.remove('side_move_right2');},1001)
+                if(matchMedia("Screen and (max-width : 768px)").matches){
+                    setTimeout(function(){$('#menu_wrap2').toggle()},1001)
+                } 
+            }
+            
+            
+        })
+        //---------------------------------------------------------------------------
+        //mapmake
+        var mapContainer = document.getElementById('map'),
+            //map 옵션
+            mapOption = {
+                center: new google.maps.LatLng({{ placelat }}, {{ placelng }}), // 지도의 중심좌표                
+                zoom: 15.5, // 지도의 확대 레벨
+            };
+            //맵을 만드는 명령
+        var map = new google.maps.Map(mapContainer, mapOption), overlays = []; 
+        //==============================================================================
+        // Street View gen
+        let panorama = new google.maps.StreetViewPanorama(
+            document.getElementById("pano"),
+            {
+                position : { lat:{{placelat}}, lng:{{placelng}} },
+                pov:{
+                    heading : 40,
+                    pitch : 10
+                },
+            }
+        );
+        
+        //==============================================================================
+        // palce mark gen 
+        var positions = [
+            {% for place in tour_places %}
+            {   
+                marker_thum: "{{place.marker_thum}}",
+                title: '<div class="tour_place">' + "<a href='{{ place.url }}'>" + "<image class='main_img' src='{{ place.photo }}' alt='없음'>" + '<span class="title">{{ place.name }}</span>' + '</a>' + '</div>',
+                latlng : new google.maps.LatLng({{ place.lat }}, {{ place.lng }}),
+            },
+            {% endfor %}
+        ];
+
+        for (var i = 0; i < positions.length; i++) {
+
+            const img ={
+                url : positions[i].marker_thum,
+                scaledSize : new google.maps.Size(45, 45),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(0, 32),
+            }
+            // 마커를 생성합니다
+            var marker = new google.maps.Marker({
+                map: map, // 마커를 표시할 지도
+                position: positions[i].latlng, // 마커의 위치
+                clickable: true,
+                icon: img
+            });
+            var infowindow = new google.maps.InfoWindow({
+                position: positions[i].latlng,
+                content: positions[i].title,
+                removable: true
+            });
+
+            infowindows.push(infowindow);
+            google.maps.event.addListener(marker, 'click', makeOverListener(map, marker, infowindow));
+            google.maps.event.addListener(marker, 'click', PanoListener(marker));
+            google.maps.event.addListener(map, 'click', makeMainListener(map, infowindow));
+        }
+
+        function PanoListener(marker){
+            return function(){
+                panorama.setPosition(marker.position)
+            };
+        }
+
+        function closeInfoWindow() {
+            for (var idx = 0; idx < infowindows.length; idx++) {
+                infowindows[idx].close()
+            }
+        }
+
+        function makeOverListener(map, marker, infowindow) {
+            return function () {
+                closeInfoWindow()
+                infowindow.open(map, marker);
+            };
+        }
+        function makeMainListener(map, infowindow) {
+            return function () {
+                infowindow.close(map, marker);
+
+            }
+        }
+        //==============================================================================
+        //marker move
+        var marker = new google.maps.Marker({
+        // 지도 중심좌표에 마커를 생성합니다 
+            position: map.getCenter()
+        });
+        // 지도에 마커를 표시합니다
+        marker.setMap(map);
+        n = 0 
+        map.addListener("click", (mapsMouseEvent) => {
+            n += 1 
+            a = mapsMouseEvent.latLng.toJSON()
+            console.log(a.lat + ' ,' + a.lng, n)
+            marker.setPosition(new google.maps.LatLng(a.lat, a.lng))
+        });
+
+        new AutocompleteDirectionHandler(map);
+        
+    }
+
+    // Navigator
+    class AutocompleteDirectionHandler{
+        constructor(map){
+            this.map = map;
+            this.orginPlaceId = "";
+            this.destinationPlaceId = "";
+            this.travelMode = google.maps.TravelMode.TRANSIT;
+            this.directionsService = new google.maps.DirectionsService();
+            this.directionsRenderer = new google.maps.DirectionsRenderer();
+            this.directionsRenderer.setMap(map);
+
+            const originInput = document.getElementById("origin-input");
+            const destinationInput = document.getElementById("destination-input")
+            const modeSelector = document.getElementById("mode-selector");
+            
+            const originAutocomplete = new google.maps.places.Autocomplete(originInput);
+            originAutocomplete.setFields(["place_id"]);
+
+            const destinationAutocomplete = new google.maps.places.Autocomplete(destinationInput);
+            destinationAutocomplete.setFields(["place_id"]);
+
+
+            this.setupPlaceChangedListener(originAutocomplete, "ORIG");
+            this.setupPlaceChangedListener(destinationAutocomplete, "DEST");
+
+        }
+
+        setupPlaceChangedListener(autocomplete, mode) {
+          autocomplete.bindTo("bounds", this.map);
+          autocomplete.addListener("place_changed", () => {
+            const place = autocomplete.getPlace();
+
+            if (!place.place_id) {
+              window.alert("Please select an option from the dropdown list.");
+              return;
+            }
+
+            if (mode === "ORIG") {
+              this.originPlaceId = place.place_id;
+            } else {
+              this.destinationPlaceId = place.place_id;
+            }
+            this.route();
+          });
+        }
+
+        route() {
+          if (!this.originPlaceId || !this.destinationPlaceId) {
+            return;
+          }
+          const me = this;
+          this.directionsService.route(
+            {
+              origin: { placeId: this.originPlaceId },
+              destination: { placeId: this.destinationPlaceId },
+              travelMode: this.travelMode,
+            },
+            (response, status) => {
+              if (status === "OK") {
+                const title = document.getElementById("N_text")
+                const change =  document.getElementById("change")
+                me.directionsRenderer.setDirections(response);
+                me.directionsRenderer.setPanel(document.getElementById("_Navi"))
+                change.style.display = "none"
+                title.innerHTML = "Search Again?"
+                $('#N_text').css("margin-left", "31%")
+
+                title.addEventListener("click", function(){
+                    if(title.innerHTML != "Search Again?"){
+                        pass
+                    }
+                    else{
+                        $('#N_text').text("Navigation")
+                        $("#_Navi > div:nth-child(3)").remove()
+                        change.style.display = "block"
+                    }
+                })
+
+                } else {
+                    window.alert("Directions request failed due to " + status);
+                }
+            }
+        );}
+    }
+
+    </script> 
+</body>
+</html>
