@@ -38,7 +38,10 @@ GOOGLE_MAPS_API_KEY = get_secret("GOOGLE_MAPS_API_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    "ap-northeast-2.compute.amazonaws.com",
+    ".voyageseoul.com",
+]
 
 
 # Application definition
