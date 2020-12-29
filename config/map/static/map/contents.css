@@ -9,14 +9,14 @@
         height: 90.5%;
         overflow: hidden;
     }
-    .header{
-        height: 8%;
+    #header{
+        height: 7.5%;
     }
     .tool_logo{
         display:inline;
     }
     .fa-home {
-        margin-top: 3.8%;
+        margin-top: 2.5%;
     }
     .tool_btn{
         margin-top: 3%;
@@ -46,23 +46,24 @@
 
     .toolbox2{
         width: 62%;
-        margin-top: 4%;
-        margin-right: 2.5%;
+        margin-top: 2.5%;
+        margin-right: 2%;
     }
 
     #pano{
-        position: fixed;
+        position: fixed !important;
         height: 25%;
         width: 49%;
         left: 1%;
-        bottom:25%;
+        bottom:0%;
         z-index: 0;
     }
-
+    .video_title{
+        font-size:14px;
+    }
     #_Navi{
-        position: absolute;
+        position: fixed;
         width: 48%;
-        bottom: 0%;
         left: 51%;
         height: 26%;
         z-index: 0;
@@ -83,27 +84,58 @@
         height: 37px;
         width: 76%;
     }
-    #menu_wrap{
+    #menu_wrap {
+        position: fixed;
         left: -111%;
-        width: 387px;
+        width: 90%;
         height: 95%;
     }
-
+    .option_you{
+        font-size: 20px;
+    }
+    .you_info{
+        font-size: 18px;
+    }
     .option_trip{
         margin-top: -4px;
-        width: 387px;
+        width: 90%;
         height: 40px;
     }
-
+    .trip_link{
+        margin: 0 auto;
+        font-family: "Raleway";
+        background-color: transparent;
+        color: rgb(070, 074, 056);
+        border: 800;
+        border: 1.5px solid rgb(070, 074, 056);
+    }
+    .trip_container{
+        margin-top: -55px;
+    }
+    #trip_img{
+        display: none;
+    }
     .trip_imgbox{
-        display: block;
-        height: 40px;
-        width: 387px;
-        padding-bottom: 30px;
-        top:120px;
+        border: none;
+        background-color: transparent;
+        z-index: -1;
+        position: relative;
+        height: 8%;
+        width: 100%;
+        padding-bottom: 5px;
+        top: 8%;
     }
-
+    .visit_date{
+        font-family: "Open sans";
+    }
+    .info_text{
+        font-size: 1.02em;
+    }
+    .info_title{
+        font-size: 23px;
+    }
     #menu_wrap2{
+        position: fixed;
         right: -97%;
         width: 95%;
         height: 95%;

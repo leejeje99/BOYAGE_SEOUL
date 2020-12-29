@@ -22,8 +22,8 @@
             -webkit-animation-duration : 0.7s;
             -webkit-animation-name : appear;
         }
-        @keyframes appear{from{bottom: -30%;}to{bottom: 3%;}}
-        @-webkit-keyframes appear{from{bottom: -30%;}to{bottom: 3%;}}
+        @keyframes appear{from{bottom: -30%;}to{bottom: 0%;}}
+        @-webkit-keyframes appear{from{bottom: -30%;}to{bottom: 0%;}}
 
         .bar_dissapear{
             animation-duration:0.5s;
@@ -249,6 +249,7 @@
             font-size: 25px;
             padding: 10px 0;
         }
+        
         .you_info{
             font-family: "Raleway";
             padding: 2% 0;
@@ -425,8 +426,8 @@
             -webkit-animation-duration: 0.5s;
             animation-duration: 0.5s;
         }
-        @-webkit-keyframes click_expand {from{ height: 30%;} to{ height: 50%;}}
-        @keyframes click_expand {from{ height: 30%;} to{ height: 50%;}}
+        @-webkit-keyframes click_expand {from{ height: 26%;} to{ height: 50%;}}
+        @keyframes click_expand {from{ height: 26%;} to{ height: 50%;}}
 
         .Navi_click_off{
             -webkit-animation-fill-mode: forwards;
@@ -436,8 +437,8 @@
             -webkit-animation-duration: 0.7s;
             animation-duration: 0.7s;
         }
-        @-webkit-keyframes click_short {from{ height: 50%;} to{top:67%; height: 30%;}}
-        @keyframes click_short {from{height: 50%;} to{height: 30%;}}
+        @-webkit-keyframes click_short {from{ height: 50%;} to{top:67%; height: 26%;}}
+        @keyframes click_short {from{height: 50%;} to{height: 26%;}}
 
         /* 오른쪽 상단 */
         #my_location, #main_position_button{
@@ -505,6 +506,7 @@
 
 <body>
     <div id="header">
+        
         <div class="tool_btn"><i class="fas fa-bars"></i></div>
         <div class="toolbox1">
             <button id="menu" class="ui_button_trip">TripAdvise</button>
@@ -783,6 +785,7 @@
             mapOption = {
                 center: new google.maps.LatLng({{ placelat }}, {{ placelng }}), // 지도의 중심좌표                
                 zoom: 15.5, // 지도의 확대 레벨
+                gestureHandling: "greedy",
             };
             //맵을 만드는 명령
         var map = new google.maps.Map(mapContainer, mapOption), overlays = []; 

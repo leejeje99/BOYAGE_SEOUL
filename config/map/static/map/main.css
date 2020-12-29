@@ -66,10 +66,31 @@
         z-index: -1000;
     }
 
+    .title{
+        font-size: 18px;
+    }
     #Logo {
         left: 1.35vw;
     }
-
+    .decript_wrap{
+        border-radius: 5px;
+        width: 101%;
+        margin: 0 auto;
+    }
+    .gm-style-iw-d{
+        width: 227px;
+        margin-right: -5px;
+    }
+    .main_img{
+        height:150px;
+    }
+    .custom_place{
+        width: 207px;
+    }
+    .descript{
+        margin-left: 9px;
+        font-size: 15px;
+    }
     #search_result_link{
         margin-top: 20px;
         font-size: 15px;

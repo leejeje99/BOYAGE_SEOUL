@@ -1,4 +1,7 @@
 {
     "git.ignoreLimitWarning": true,
-    "python.formatting.provider": "yapf"
+    "python.formatting.provider": "yapf",
+    "html.format.contentUnformatted": "",
+    "htmltagwrap.autoDeselectClosingTag": false,
+    "html.autoClosingTags": false
 }
