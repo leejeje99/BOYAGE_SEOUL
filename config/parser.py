@@ -1,5 +1,6 @@
 import requests
-from selenium.webdriver import Chrome
+from selenium import webdriver
+from pyvirtualdisplay import Display
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -19,14 +20,17 @@ django.setup()
 
 from map.models import YoutubeData, Place, Seoul_detail, detail_route, TourReview
 
+display = Display(visible=0, size=(1920, 1080))
+display.start()
 
-
+path = '/home/ubuntu/Test/BOYAGE_SEOUL/chromedriver'
 
 def savevideo():
     delay = 30
-    browser = Chrome("C:\\Users\\User\\Desktop\\boyage  seoul\\config\\chromedriver.exe")
+    browser = webdriver.Chrome(path)
     browser.implicitly_wait(delay)
     places = Place.objects.all()
+
     for place in places:
         if place.name == "Hongik University":
             base_url = 'https://www.youtube.com/results?search_query=' + place.name  + '&sp=CAMSAggF'
