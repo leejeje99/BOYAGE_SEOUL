@@ -81,14 +81,14 @@ def seoul_data():
 
 
 def seoul_route():
-    file = open('3각지역루트.csv', 'r', encoding='UTF8')
+    file = open('1Place.csv', 'r', encoding='UTF8')
     dataset = file.read()
     io_string = io.StringIO(dataset)
 
     # next(io_string)
     for column in csv.reader(io_string, delimiter=','):
         _, created = detail_route.objects.update_or_create(
-            place=Place.objects.get(name=column[0]),
+            place=column[0],
             lat=column[1],
             lng=column[2],
         )

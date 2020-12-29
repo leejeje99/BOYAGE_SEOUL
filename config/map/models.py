@@ -11,7 +11,7 @@ class Place(models.Model):
     lng = models.CharField(max_length=25)
     gu = models.CharField(max_length=25,default=1)
 
-    image = models.ImageField(blank=True)
+    image = models.URLField(blank=True)
     description = models.CharField(blank=True,max_length=100)
 
     trip_url = models.URLField(blank=True)
