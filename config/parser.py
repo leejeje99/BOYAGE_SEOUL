@@ -28,35 +28,36 @@ def savevideo():
     browser.implicitly_wait(delay)
     places = Place.objects.all()
     for place in places:
-        base_url = 'https://www.youtube.com/results?search_query=' + place.name  + '&sp=CAMSAggF'
-        browser.get(base_url)
-        browser.execute_script("window.scrollTo(0,312)")
+        if place.name == "Hongik University":
+            base_url = 'https://www.youtube.com/results?search_query=' + place.name  + '&sp=CAMSAggF'
+            browser.get(base_url)
+            browser.execute_script("window.scrollTo(0,312)")
 
-        for j in range(1, 6):
+            for j in range(1, 6):
 
-            img_xpath = '/html/body/ytd-app/div/ytd-page-manager/ytd-search/div[1]/ytd-two-column-search-results-renderer/div/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-video-renderer['+ str(j) +']/div[1]/ytd-thumbnail/a/yt-img-shadow/img'
-            title_xpath = '/html/body/ytd-app/div/ytd-page-manager/ytd-search/div[1]/ytd-two-column-search-results-renderer/div/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-video-renderer['+ str(j) +']/div[1]/div/div[1]/div/h3/a/yt-formatted-string'
-            link_xpath = '/html/body/ytd-app/div/ytd-page-manager/ytd-search/div[1]/ytd-two-column-search-results-renderer/div/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-video-renderer[' + str(j) + ']/div[1]/ytd-thumbnail/a'
+                img_xpath = '/html/body/ytd-app/div/ytd-page-manager/ytd-search/div[1]/ytd-two-column-search-results-renderer/div/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-video-renderer['+ str(j) +']/div[1]/ytd-thumbnail/a/yt-img-shadow/img'
+                title_xpath = '/html/body/ytd-app/div/ytd-page-manager/ytd-search/div[1]/ytd-two-column-search-results-renderer/div/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-video-renderer['+ str(j) +']/div[1]/div/div[1]/div/h3/a/yt-formatted-string'
+                link_xpath = '/html/body/ytd-app/div/ytd-page-manager/ytd-search/div[1]/ytd-two-column-search-results-renderer/div/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-video-renderer[' + str(j) + ']/div[1]/ytd-thumbnail/a'
 
-            # 썸네일 주소를 리스트에 저장
-            image = browser.find_element_by_xpath(img_xpath)
-            img_url = image.get_attribute('src')
-            # if img_url == '' :
-            #     body = browser.find_element_by_xpath('/html/body')
-            #     body.Keys()
+                # 썸네일 주소를 리스트에 저장
+                image = browser.find_element_by_xpath(img_xpath)
+                img_url = image.get_attribute('src')
+                # if img_url == '' :
+                #     body = browser.find_element_by_xpath('/html/body')
+                #     body.Keys()
 
-            # 타이틀을 리스트에 저장
-            title = browser.find_element_by_xpath(title_xpath)
+                # 타이틀을 리스트에 저장
+                title = browser.find_element_by_xpath(title_xpath)
 
-            # 링크
-            link = browser.find_element_by_xpath(link_xpath)
-            link_url = link.get_attribute('href')
+                # 링크
+                link = browser.find_element_by_xpath(link_xpath)
+                link_url = link.get_attribute('href')
 
-            YoutubeData.objects.update_or_create(place=(Place(pk=place.id)),
-                        title=title.text,
-                        link=link_url,
-                        thumb=img_url)
-
+                YoutubeData.objects.update_or_create(place=(Place(pk=place.id)),
+                            title=title.text,
+                            link=link_url,
+                            thumb=img_url)
+            break
 
 
 def seoul_data():
@@ -177,7 +178,7 @@ def tourReview():
         browser.switch_to.window(browser.window_handles[0])
 
 
-seoul_data()
+savevideo()
 
 
 
