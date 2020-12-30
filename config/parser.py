@@ -23,7 +23,8 @@ from map.models import YoutubeData, Place, Seoul_detail, detail_route, TourRevie
 display = Display(visible=0, size=(1920, 1080))
 display.start()
 
-path = '/home/ubuntu/Test/BOYAGE_SEOUL/chromedriver'
+path = '/home/ubuntu/BOYAGE_SEOUL/config/chromedriver'
+
 
 def savevideo():
     delay = 30
@@ -61,6 +62,7 @@ def savevideo():
                             title=title.text,
                             link=link_url,
                             thumb=img_url)
+            print("완료")
             browser.close()
             break
 
@@ -106,14 +108,14 @@ def tourReview():
     base_url = "https://www.tripadvisor.com/"
     places = Place.objects.all()
     keyword = "Myeongdong Shopping Street"
-    
+
     for place in places:
         if place.name == keyword:
         # 검색 용어 설정 및 base_Url 이동
-            
+            print("성공")
             # keyword = place.name
             browser.get(base_url)
-            time.sleep(1)
+            time.sleep(3)
             # 화면 비율 설정 browser.execute_script("document.body.style.zoom='67%'")
             # 메인에서 검색 input 클릭
             search_btn = browser.find_element_by_css_selector("#lithium-root > main > div.U2O9sR7- > div > div > div._12nbOYJX > div._3-KjE8YR > div > form > input._3qLQ-U8m")
@@ -128,17 +130,16 @@ def tourReview():
 
             # 브라우저 현재 위치 반환
             # print(browser.current_url)
-            P = Place.objects.get(name=keyword)
-            P.trip_url = browser.current_url
-            P.save()
             # 페이지 리뷰 중 좋은 리뷰들 선택 및 클릭
             excellent_label = browser.find_element_by_css_selector("div.Z78qJt1n > div:nth-child(1) > div.ui_column.is-5.is-12-mobile > ul > li:nth-child(1) > label")
             very_good_label = browser.find_element_by_css_selector("div.Z78qJt1n > div:nth-child(1) > div.ui_column.is-5.is-12-mobile > ul > li:nth-child(2) > label")
             Average_label = browser.find_element_by_css_selector("div.Z78qJt1n > div:nth-child(1) > div.ui_column.is-5.is-12-mobile > ul > li:nth-child(3) > label")
             excellent_label.click()
+            time.sleep(2)
             very_good_label.click()
+            time.sleep(2)
             Average_label.click()
-            time.sleep(3)
+            time.sleep(2)
             # 리뷰 긁기
             page = 1
             review = 0
@@ -178,15 +179,15 @@ def tourReview():
                 page += 1
                 page_btn = browser.find_element_by_css_selector("._16gKMTFp > div > div > a:nth-child(%d)" % page)
                 page_btn.click()
-                time.sleep(1)
+                time.sleep(2)
 
-            
+            print("완료")
             browser.close()
             break
     
 
 
-savevideo()
+tourReview()
 
 
 
