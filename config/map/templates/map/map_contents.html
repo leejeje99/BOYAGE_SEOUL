@@ -5,6 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="shortcut icon" href="{% static 'map/favicon.ico' %}" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -872,14 +873,14 @@
             position: map.getCenter()
         });
         // 지도에 마커를 표시합니다
-        marker.setMap(map);
-        n = 0 
-        map.addListener("click", (mapsMouseEvent) => {
-            n += 1 
-            a = mapsMouseEvent.latLng.toJSON()
-            console.log(a.lat + ' ,' + a.lng, n)
-            marker.setPosition(new google.maps.LatLng(a.lat, a.lng))
-        });
+        // marker.setMap(map);
+        // n = 0 
+        // map.addListener("click", (mapsMouseEvent) => {
+        //     n += 1 
+        //     a = mapsMouseEvent.latLng.toJSON()
+        //     console.log(a.lat + ' ,' + a.lng, n)
+        //     marker.setPosition(new google.maps.LatLng(a.lat, a.lng))
+        // });
 
         new AutocompleteDirectionHandler(map);
         

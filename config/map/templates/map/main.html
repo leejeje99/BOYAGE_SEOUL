@@ -3,13 +3,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="shortcut icon" href="{% static 'map/favicon.ico' %}" type="image/x-icon">
     <meta property="og:image" content="{% static 'map/Logo.png' %}">
     <meta property="og:title" content="VOYAGE SEOUL">
     <meta property="og:description" content="Find Best Attracions In Seoul!">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Document</title> 
+    <title>Voyage Seoul</title> 
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Raleway&display=swap" rel="stylesheet">
@@ -584,14 +585,14 @@
         if(matchMedia("Screen and (min-width : 768px)").matches){
             mapOption = {
                 center: {lat :37.57180813280114 , lng:126.90710964039833}, // 지도의 중심좌표                
-                zoom:13.1, // 지도의 확대 레벨
+                zoom:12, // 지도의 확대 레벨
+                minZoom :13.2
             };
         }
         else {
             mapOption = {
                 center: {lat :37.60050679762352, lng: 126.99737991825937}, // 지도의 중심좌표                
                 zoom:13, // 지도의 확대 레벨
-                maxZoom :13.2,
                 minZoom : 13,
                 gestureHandling: "greedy"
             };

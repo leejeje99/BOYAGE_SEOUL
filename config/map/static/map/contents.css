@@ -10,6 +10,7 @@
         overflow: hidden;
     }
     #header{
+        overflow: hidden;
         height: 7.5%;
     }
     .tool_logo{
@@ -102,6 +103,7 @@
         height: 40px;
     }
     .trip_link{
+        height: 64%;
         margin: 0 auto;
         font-family: "Raleway";
         background-color: transparent;
